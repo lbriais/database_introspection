@@ -1,10 +1,9 @@
-# DatabaseIntrospection
+# Database Introspection
 
-This gem does a bit the reverse action of what you do with Rails generator.
-
-It introspects the database and creates __dynamically__ ActiveRecord descendants that can be used by your application, including some Rails associations helper methods.
+This gem will introspect the database and create __dynamically__ ActiveRecord::Base descendants that can be used by your application, including some Rails associations helper methods.
 
 It is intended to be primarily used within rails applications but nothing prevents you to use standalone, provided the fact you are already connected to a database.
+This gem does a bit the reverse action of what you do with Rails generator, when you want to generate the database from you migrations.
 
 
 ## Installation
@@ -55,8 +54,8 @@ DynamicModel::ManagedDomains::UserDefined::Table4
 #### Classes and modules generated
 
 * `DynamicModel` is the module that contains methods to introspect the database.
-* `DynamicModel::ManagedDomain` contains some methods to manipulates the domains introspected.
-* Then for example in the first example, `DynamicModel::ManagedDomains::UserDefined` is a module created dynamically from the domain name (ie tables prefix). It contains itself some methods to easily manipulate the tables or generated classes.
+* `DynamicModel::ManagedDomain` contains some methods to manipulate the domains introspected.
+* Then for example in the first example, `DynamicModel::ManagedDomains::UserDefined` is a module created dynamically from the domain name (ie tables prefix). It contains itself some methods to easily manipulate the tables or generated classes of this particular domain.
 * The `DynamicModel::ManagedDomains::UserDefined::Tablex` classes are descendants of ActiveRecord::Base that you will use in your application.
 
 Of course if you provide another domain name (ie tables prefix) the corresponding modules and classes will be created accordingly. Running:
@@ -95,9 +94,9 @@ if `user_defined_table1` contains `user_defined_table2_id` (not yet implemented)
 
 ## To do
 
-* Improve Readme
-* Added inline code documentation
-* Improve table relationship introspection
+* Improve Readme.
+* Add code comments.
+* Improve table relationship introspection.
 
 ## Contributing
 
