@@ -1,3 +1,4 @@
+require 'active_record'
 
 class DynamicModel::TablesAnalyser
 

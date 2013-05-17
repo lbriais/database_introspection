@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.email         = ["lbnetid+rb@gmail.com"]
   spec.description   = %q{This gem will generate classes (by default ActiveRecord::Base descendants) from database introspection}
   spec.summary       = %q{Database Introspection}
-  spec.homepage      = ""
+  spec.homepage      = "https://github.com/lbriais/database_introspection"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files`.split($/)

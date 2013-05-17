@@ -1,3 +1,5 @@
+require 'active_record'
+
 module DynamicModel::DomainExtension
 
   def model_classes

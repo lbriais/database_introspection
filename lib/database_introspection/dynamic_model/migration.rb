@@ -1,3 +1,4 @@
+require 'active_record'
 class DynamicModel::Migration < ActiveRecord::Migration
   def self.create_with(name, &block)
     create_table name.to_sym do |t|
