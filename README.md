@@ -1,6 +1,6 @@
 # Database Introspection
 
-This gem will introspect the database and create __dynamically__ ActiveRecord::Base descendants that can be used by your application, including some Rails associations helper methods.
+[This gem][gemref] will introspect the database and create __dynamically__ ActiveRecord::Base descendants that can be used by your application, including some Rails associations helper methods.
 
 It is intended to be primarily used within rails applications but nothing prevents you to use standalone, provided the fact you are already connected to a database.
 This gem does a bit the reverse action of what you do with Rails generator, when you want to generate the database from you migrations.
@@ -19,6 +19,8 @@ And then execute:
 Or install it yourself as:
 
     $ gem install database_introspection
+
+Classes documentation is available [here](http://rubydoc.info/gems/database_introspection/0.1.0/frames)
 
 ## Usage
 
@@ -86,7 +88,7 @@ DynamicModel::ManagedDomains::AnotherDomain
 
 The classes generated will actually have some behaviour added by extending the module `DynamicModel::ActiveRecordExtension` to basically be aware of the domain they belong to.
 
-### Database relationships
+### Table relationships
 
 Provided you follow the standard rails rules for ids, for example:
 
@@ -105,3 +107,6 @@ if `user_defined_table1` contains `user_defined_table2_id` or simply `table2_id`
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
 5. Create new Pull Request
+
+
+[gemref]: https://rubygems.org/gems/database_introspection "Rails Database Introspection gem"
