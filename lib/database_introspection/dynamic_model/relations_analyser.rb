@@ -1,7 +1,11 @@
 # -*- coding: utf-8 -*-
+
+# This class is in charge to analyse the relationships between the tables of the domain.
+# It will then add association methods to the classes.
 class DynamicModel::RelationsAnalyser
   KEY_IDENTIFIER = /_id$/
 
+  # 
   attr_reader :alterations
 
   def initialize(klasses)
@@ -40,7 +44,10 @@ class DynamicModel::RelationsAnalyser
 
   def introspect_belongs_to
     puts "Belongs_to analysis started."
+    # scoped_table_names_hash is a hash with keys made of table names (both scoped and unscoped)
+    # and the values are the associated classes.
     scoped_table_names_hash = Hash[@domain.scoped_table_names.zip @domain.model_classes]
+    scoped_table_names_hash.merge! Hash[@domain.table_names.zip @domain.model_classes]
     @klasses.each do |klass|
       @alterations[klass] ||= {}
       # Find attributes ending by "_id"
@@ -138,7 +145,7 @@ class DynamicModel::RelationsAnalyser
 
 
   def add_belongs_to_behaviour(model, description)
-    field_name = description[:key].gsub KEY_IDENTIFIER, ''
+    field_name = description[:class].list_name.singularize
     model.belongs_to field_name, :foreign_key => description[:key], :class_name => description[:class].name
     puts " - belongs_to :#{field_name}, :foreign_key => #{description[:key]}, :class_name => #{description[:class].name}"
   end

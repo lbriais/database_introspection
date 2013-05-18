@@ -90,7 +90,7 @@ The classes generated will actually have some behaviour added by extending the m
 
 Provided you follow the standard rails rules for ids, for example:
 
-if `user_defined_table1` contains `user_defined_table2_id` (not yet implemented) or `table2_id`, the introspector will understand there is a relationship between the tables and create the ActiveRecord associations accordingly adding all the standard helper methods to the generated classes !
+if `user_defined_table1` contains `user_defined_table2_id` or simply `table2_id` (if `table2` is part of the same domain `user_defined`), the introspection process will understand there is a relationship between the tables and create the ActiveRecord associations accordingly adding all the standard helper methods to the generated classes !
 
 ## To do
 

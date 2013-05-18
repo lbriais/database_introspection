@@ -9,5 +9,6 @@ require 'database_introspection/dynamic_model/migration'
 
 
 module DatabaseIntrospection
-  # Your code goes here...
+  # There is nothing to see there.
+  # Everything is under dynamic_model
 end
