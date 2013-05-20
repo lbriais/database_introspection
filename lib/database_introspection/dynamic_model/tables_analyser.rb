@@ -31,6 +31,8 @@ class DynamicModel::TablesAnalyser
     else
       klass = @domain_module.const_set short_model_name, Class.new(@base_class)
       puts "Created #{klass.name} to handle #{table_name}"
+      # Disables STI
+      klass.inheritance_column = nil
       # Adds some class methods
       klass.send :include, DynamicModel::ActiveRecordExtension
     end
