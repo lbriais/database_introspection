@@ -22,6 +22,10 @@ module DynamicModel::DomainExtension
     DynamicModel.add_table scoped_table_name, table_prefix: prefix, &block
   end
 
+  def alter_table(scoped_table_name, &block)
+    DynamicModel.alter_table scoped_table_name, table_prefix: prefix, &block
+  end
+
   def model_class(scoped_table_name)
     Hash[scoped_table_names.zip model_classes][scoped_table_name]
   end

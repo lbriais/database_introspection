@@ -1,6 +1,6 @@
 require 'active_record'
 class DynamicModel::Migration < ActiveRecord::Migration
-  def self.create_with(name, &block)
+  def self.create_for(name, &block)
     create_table name.to_sym do |t|
       block.call(t) if block_given?
       begin
@@ -10,4 +10,11 @@ class DynamicModel::Migration < ActiveRecord::Migration
       end
     end
   end
+
+  def self.update_for(name, &block)
+    change_table name.to_sym do |t|
+      block.call(t) if block_given?
+    end
+  end
+
 end
