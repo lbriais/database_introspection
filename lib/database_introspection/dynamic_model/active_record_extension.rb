@@ -25,11 +25,15 @@ module DynamicModel::ActiveRecordExtension
     end
 
     def name_space
-      self.name.gsub( /DynamicModel::ManagedDomains::([^:]+)::.*$/, "\\1") .underscore
+      self.name.gsub(/DynamicModel::ManagedDomains::([^:]+)::.*$/, "\\1") .underscore
     end
 
     def list_name
       self.name.gsub( /^.*::([^:]+)$/, "\\1") .underscore.pluralize
+    end
+
+    def alter(&block)
+      self.domain.alter_table(self.list_name, &block)
     end
 
   end

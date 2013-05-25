@@ -2,7 +2,7 @@ require 'active_record'
 
 class DynamicModel::TablesAnalyser
 
-  attr_reader :domain, :klasses_analysed
+  attr_reader :domain, :base_class, :klasses_analysed
 
   def initialize(domain, base_class = ActiveRecord::Base)
     @domain = domain
@@ -28,14 +28,17 @@ class DynamicModel::TablesAnalyser
     if @domain_module.constants.include? short_model_name.to_sym
       klass = @domain_module.const_get short_model_name
       puts "Found #{klass.name} that already handles #{table_name}"
+      klass.reset_column_information
     else
       klass = @domain_module.const_set short_model_name, Class.new(@base_class)
       puts "Created #{klass.name} to handle #{table_name}"
-      # Disables STI
-      klass.inheritance_column = nil
-      # Adds some class methods
-      klass.send :include, DynamicModel::ActiveRecordExtension
+
     end
+    # Adds some class methods
+    klass.send :include, DynamicModel::ActiveRecordExtension
+    #end
+    # Disables STI
+    klass.inheritance_column = nil
 
     # Maps the class to the correct table
     klass.table_name = table_name
