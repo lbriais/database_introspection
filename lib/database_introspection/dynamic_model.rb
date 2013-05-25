@@ -6,6 +6,11 @@ module DynamicModel
   # ActiveRecord descendant classes are dynamically created from database introspection in their own namespace
   # (DynamicModel::<NameSpace>::) The name of the module NameSpace is derived from table_prefix.
   def self.introspect_database(table_prefix = :user_defined, base_class = ActiveRecord::Base)
+    if table_prefix.class == Array
+      table_prefix.each {|p| self.introspect_database p, base_class}
+      return
+    end
+
     table_prefix = table_prefix.to_s
     @domain_analyser ||= {}
 
