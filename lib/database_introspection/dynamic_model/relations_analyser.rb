@@ -158,6 +158,8 @@ class DynamicModel::RelationsAnalyser
     puts " - has_many :#{field_name}, #{options.inspect}"
   end
 
+  # TODO: maybe check the intermediate class and depending upon the fact it contains a primary key, if only 2 fields
+  #       exist. It may be a habtm instead of has_many :through...
   def add_has_many_through_behaviour(model, description)
     field_name = description[:class].list_name.to_sym
     options = {through: description[:middle_class].list_name.to_sym, source: description[:class].list_name.singularize}

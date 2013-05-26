@@ -1,9 +1,18 @@
 # Database Introspection
 
-[This gem][gemref] will introspect the database and create __dynamically__ ActiveRecord::Base descendants that can be used by your application, including some Rails associations helper methods.
+[This gem][gemref] will introspect the database and create __dynamically__ ActiveRecord::Base descendants that can be
+used by your application, including some Rails associations helper methods.
 
-It is intended to be primarily used within rails applications but nothing prevents you to use standalone, provided the fact you are already connected to a database.
-This gem does a bit the reverse action of what you do with Rails generator, when you want to generate the database from you migrations.
+It is intended to be primarily used within rails applications but nothing prevents you to use standalone, provided
+the fact you are already connected to a database.
+This gem does a bit the reverse action of what you do with Rails generator, when you want to generate the database from
+you migrations.
+
+Basically, it will infer the database and create ActiveRecord::Base descendants to handle tables already defined in the database.
+
+The cool point is that it will as well guess from column names in the tables the relations between tables and dynamically
+create the associations in the generated classes and thus all helper methods (for belongs_to, has_many and even has_many
+:through).
 
 
 ## Installation
