@@ -102,8 +102,8 @@ class DynamicModel::RelationsAnalyser
 
   def analyses_has_many_through_association(model, associations)
     # As there are multiple belongs_to in this class, all combinations
-    # should lead to a has_many_through
-    # Waouh, Ruby rocks !!
+    # should lead to a has_many :through
+    # Wow, Ruby rocks !!
     associations.combination(2).each do |left, right|
       @alterations[left[:class]][:has_many_through] ||= []
       @alterations[right[:class]][:has_many_through] ||= []
@@ -145,26 +145,31 @@ class DynamicModel::RelationsAnalyser
 
 
   def add_belongs_to_behaviour(model, description)
-    field_name = description[:class].list_name.singularize
-    model.belongs_to field_name, :foreign_key => description[:key], :class_name => description[:class].name
-    puts " - belongs_to :#{field_name}, :foreign_key => #{description[:key]}, :class_name => #{description[:class].name}"
+    field_name = description[:class].list_name.singularize.to_sym
+    options = {foreign_key: description[:key], class_name: description[:class].name}
+    model.belongs_to field_name, options
+    puts " - belongs_to :#{field_name}, #{options.inspect}"
   end
 
   def add_has_many_behaviour(model, description)
-    field_name = description[:class].list_name
-    model.has_many field_name, :class_name => description[:class].name
-    puts " - has_many :#{field_name}, :class_name => #{description[:class].name}"
+    field_name = description[:class].list_name.to_sym
+    options = {class_name: description[:class].name}
+    model.has_many field_name, options
+    puts " - has_many :#{field_name}, #{options.inspect}"
   end
 
   def add_has_many_through_behaviour(model, description)
-    puts " - has_many #{description[:class]} through #{description[:middle_class]}" 
+    field_name = description[:class].list_name.to_sym
+    options = {through: description[:middle_class].list_name.to_sym, source: description[:class].list_name.singularize}
+    model.has_many field_name, options
+    puts " - has_many :#{field_name}, #{options.inspect}"
   end
 
-
   def add_has_one_behaviour(model, description)
-    field_name = description[:class].list_name.singularize
-    model.has_one field_name, :class_name => description[:class].name
-    puts " - has_one :#{field_name}, :class_name => #{description[:class].name}"
+    field_name = description[:class].list_name.singularize.to_sym
+    options = {class_name: description[:class].name}
+    model.has_one field_name, options
+    puts " - has_one :#{field_name}, #{options.inspect}"
   end
 
 end
