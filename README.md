@@ -29,7 +29,7 @@ Or install it yourself as:
 
     $ gem install database_introspection
 
-Classes documentation is available [here](http://rubydoc.info/gems/database_introspection/0.1.0/frames)
+Classes documentation is available [here](http://rubydoc.info/gems/database_introspection/0.2.0/frames)
 
 ## Usage
 
@@ -106,8 +106,7 @@ if `user_defined_table1` contains `user_defined_table2_id` or simply `table2_id`
 ## To do
 
 * Improve Readme.
-* Add code comments.
-* Improve table relationship introspection.
+* Improve code documentation.
 
 ## Contributing
 
