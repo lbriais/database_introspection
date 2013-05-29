@@ -29,7 +29,7 @@ Or install it yourself as:
 
     $ gem install database_introspection
 
-Classes documentation is available [here](http://rubydoc.info/gems/database_introspection/0.2.0/frames)
+Classes documentation is available [here][rubydoc]
 
 ## Usage
 
@@ -118,3 +118,4 @@ if `user_defined_table1` contains `user_defined_table2_id` or simply `table2_id`
 
 
 [gemref]: https://rubygems.org/gems/database_introspection "Rails Database Introspection gem"
+[rubydoc]: http://rubydoc.info/gems/database_introspection/0.2.0/frames "Classes Documentation"
