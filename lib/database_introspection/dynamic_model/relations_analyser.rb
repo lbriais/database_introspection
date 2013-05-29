@@ -155,6 +155,9 @@ class DynamicModel::RelationsAnalyser
     field_name = description[:class].list_name.to_sym
     options = {class_name: description[:class].name}
     model.has_many field_name, options
+    # Attribute for mass assignment
+    attr = field_name.to_s.singularize + "_ids"
+    model.attr_accessible *(model.attr_accessible[:default].to_a << attr)
     puts " - has_many :#{field_name}, #{options.inspect}"
   end
 
@@ -164,6 +167,9 @@ class DynamicModel::RelationsAnalyser
     field_name = description[:class].list_name.to_sym
     options = {through: description[:middle_class].list_name.to_sym, source: description[:class].list_name.singularize}
     model.has_many field_name, options
+    # Attribute for mass assignment
+    attr = field_name.to_s.singularize + "_ids"
+    model.attr_accessible *(model.attr_accessible[:default].to_a << attr)
     puts " - has_many :#{field_name}, #{options.inspect}"
   end
 
