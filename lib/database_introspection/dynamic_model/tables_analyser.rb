@@ -44,7 +44,7 @@ class DynamicModel::TablesAnalyser
   end
 
   def define_domain_module
-    domain_name = @domain.singularize.camelize
+    domain_name = @domain.camelize
     @domain_module = nil
     if DynamicModel::ManagedDomains.constants.include? domain_name.to_sym
       @domain_module = DynamicModel::ManagedDomains.const_get domain_name
