@@ -12,7 +12,7 @@ module DynamicModel
       table_prefix.each {|p| self.introspect_database p, base_class}
       return
     end
-    table_prefix = table_prefix.to_s
+    table_prefix = table_prefix.to_s if table_prefix.is_a? Symbol
     analyse_domain table_prefix, base_class
   end
 
@@ -21,6 +21,8 @@ module DynamicModel
   # If block is provided it will behave like create_table method for migrations, allowing
   # to create any other column.
   def self.add_table(scoped_table_name, table_prefix: :user_defined, base_class: ActiveRecord::Base, &block)
+    scoped_table_name = scoped_table_name.to_s if scoped_table_name.is_a? Symbol
+    table_prefix = table_prefix.to_s if table_prefix.is_a? Symbol
     for_action_on_table(scoped_table_name, table_prefix) do |table_prefix, real_table_name|
       Migration::create_for "#{table_prefix}_#{real_table_name}", &block
     end
@@ -34,6 +36,8 @@ module DynamicModel
   # to create any other column.
   def self.alter_table(scoped_table_name, table_prefix: :user_defined, base_class: ActiveRecord::Base, &block)
     raise "Missing block parameter" unless block_given?
+    scoped_table_name = scoped_table_name.to_s if scoped_table_name.is_a? Symbol
+    table_prefix = table_prefix.to_s if table_prefix.is_a? Symbol
     for_action_on_table(scoped_table_name, table_prefix) do |table_prefix, real_table_name|
       Migration::update_for "#{table_prefix}_#{real_table_name}", &block
     end
